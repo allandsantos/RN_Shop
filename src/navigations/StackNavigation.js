@@ -1,13 +1,32 @@
 import {createStackNavigator} from 'react-navigation-stack';
-import ShopScreen from '../screens/ShopScreen';
-import ProductDetailScreen from '../screens/ProductDetailScreen';
-import CartScreen from '../screens/CartScreen';
-import {createNavigator} from 'react-navigation';
+import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
+import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
+import CartScreen from '../screens/shop/CartScreen';
+import Colors from '../constants/Colors';
 
-const StackNavigation = createStackNavigator({
-  Shop: ShopScreen,
-  ProductDetail: ProductDetailScreen,
-  Cart: CartScreen,
-});
+const defaultNavigationOptions = {
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: 'black',
+    },
+    // headerTitleStyle: {
+    //   textAlign: 'center',
+    // },
+    headerTintColor: Colors.white,
+    // headerTitleContainerStyle: {
+    //   width: '100%',
+    //   alignItems: 'center',
+    // },
+  },
+};
 
-export default createNavigator(StackNavigation);
+const StackNavigation = createStackNavigator(
+  {
+    ProductsOverview: ProductsOverviewScreen,
+    ProductDetail: ProductDetailScreen,
+    Cart: CartScreen,
+  },
+  defaultNavigationOptions,
+);
+
+export default StackNavigation;

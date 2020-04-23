@@ -1,6 +1,8 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import DrawerNavigation from './DrawerNavigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import {createAppContainer} from 'react-navigation';
+import StackNavigation from './StackNavigation';
 
-export default MainNavigation;
+const MainNavigation = StackNavigation;
 
-const styles = StyleSheet.create({});
+export default createAppContainer(MainNavigation);
