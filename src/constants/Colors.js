@@ -1,5 +1,5 @@
 const Colors = {
-  mainApp: '#6f42c1',
+  mainApp: '#000',
   blue: '#007bff',
   indigo: '#6610f2',
   purple: '#6f42c1',

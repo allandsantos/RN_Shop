@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const CartScreen = () => {
+const CartScreen = (props) => {
+  const product = props.navigation.getParam('product');
   return (
     <View style={styles.screen}>
-      <Text>Cart Screen</Text>
+      <Text>Cart {product.title}</Text>
     </View>
   );
 };

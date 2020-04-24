@@ -3,15 +3,19 @@ import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import CartScreen from '../screens/shop/CartScreen';
 import Colors from '../constants/Colors';
+import Fonts from '../constants/Fonts';
 
 const defaultNavigationOptions = {
   defaultNavigationOptions: {
     headerStyle: {
       backgroundColor: 'black',
     },
-    // headerTitleStyle: {
-    //   textAlign: 'center',
-    // },
+    headerTitleStyle: {
+      fontFamily: Fonts.openSansBold,
+    },
+    headerBackTitleStyle: {
+      fontFamily: Fonts.openSans,
+    },
     headerTintColor: Colors.white,
     // headerTitleContainerStyle: {
     //   width: '100%',
@@ -23,7 +27,7 @@ const defaultNavigationOptions = {
 const StackNavigation = createStackNavigator(
   {
     ProductsOverview: ProductsOverviewScreen,
-    ProductDetail: ProductDetailScreen,
+    ProductDetails: ProductDetailScreen,
     Cart: CartScreen,
   },
   defaultNavigationOptions,

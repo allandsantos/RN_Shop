@@ -6,7 +6,7 @@ const initialState = {
   userProducts: PRODUCTS.filter((prod) => prod.ownerId === 'u1'),
 };
 
-const productsReducer = (state = initialState, action) => {
+export const productsReducer = (state = initialState, action) => {
   switch (action) {
     case EDIT_PRODUCT:
       return {...state};
@@ -14,5 +14,3 @@ const productsReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default productsReducer;
