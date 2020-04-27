@@ -4,7 +4,11 @@ import Fonts from '../../constants/Fonts';
 
 const DefaultText = (props) => {
   const setStyle = props.bold ? styles.bold : styles.default;
-  return <Text style={{...props.style, ...setStyle}}>{props.children}</Text>;
+  return (
+    <Text {...props} style={{...props.style, ...setStyle}}>
+      {props.children}
+    </Text>
+  );
 };
 
 export default DefaultText;

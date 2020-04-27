@@ -40,6 +40,10 @@ const ProductsOverviewScreen = (props) => {
                   ),
                 );
               }}
+              onRemove={() => {
+                console.log('hitou');
+                dispatch(cartActions.removeItemsFromCart(item.id));
+              }}
             />
           )}
           showsVerticalScrollIndicator={false}
@@ -50,6 +54,7 @@ const ProductsOverviewScreen = (props) => {
 };
 HeaderButtons;
 ProductsOverviewScreen.navigationOptions = (navData) => {
+  console.log(navData.navigation);
   return {
     headerTitle: 'All Products',
     headerRight: (
@@ -57,10 +62,24 @@ ProductsOverviewScreen.navigationOptions = (navData) => {
         <Item
           title="Cart"
           iconName="md-cart"
-          onPress={() => navData.navigation.navigate('Cart')}
+          onPress={() => {
+            navData.navigation.setParams(navData.onRemove);
+            navData.navigation.navigate('Cart');
+          }}
         />
       </HeaderButtons>
     ),
+    // headerLeft: (
+    //   <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+    //     <Item
+    //       title="Menu"
+    //       iconName="ios-menu"
+    //       onPress={() => {
+    //         navData.navigation.toggleDrawer();
+    //       }}
+    //     />
+    //   </HeaderButtons>
+    // ),
   };
 };
 

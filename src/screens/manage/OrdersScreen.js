@@ -9,6 +9,12 @@ const OrdersScreen = () => {
   );
 };
 
+OrdersScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: 'Your Orders',
+  };
+};
+
 export default OrdersScreen;
 
 const styles = StyleSheet.create({

@@ -6,14 +6,16 @@ import {combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import Colors from './src/constants/Colors';
 import {cartReducer} from './src/store/reducers/cart';
+import {ordersReducer} from './src/store/reducers/orders';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
+  orders: ordersReducer,
 });
 
-const store = createStore(rootReducer); //, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools());
 
 const App: () => React$Node = () => {
   YellowBox.ignoreWarnings([

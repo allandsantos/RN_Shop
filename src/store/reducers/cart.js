@@ -1,4 +1,4 @@
-import {ADD_ITEMS_TO_CART} from '../actions/cart';
+import {ADD_ITEMS_TO_CART, REMOVE_ITEM_FROM_CART} from '../actions/cart';
 
 const initialState = {
   items: [],
@@ -30,7 +30,24 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case REMOVE_ITEM_FROM_CART:
+      const indexToDelete = state.items.findIndex(
+        (itm) => itm.productId === action.itemId,
+      );
+      const itemForExclude = state.items[indexToDelete];
+      if (itemForExclude.quantity > 1) {
+        itemForExclude.quantity -= 1;
+        itemForExclude.sum = parseFloat(
+          (itemForExclude.quantity * itemForExclude.productPrice).toFixed(2),
+        );
+      } else {
+        state.items.splice(indexToDelete, 1);
+      }
+      state.totalAmmount = parseFloat(
+        (state.totalAmmount - itemForExclude.productPrice).toFixed(2),
+      );
 
+      return {...state};
     default:
       return state;
   }

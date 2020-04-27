@@ -3,27 +3,28 @@ import {Card, CardItem, Body, Grid, Row, Col, Button, Icon} from 'native-base';
 import DefaultText from '../utils/DefaultText';
 import {StyleSheet, View, Text} from 'react-native';
 import Colors from '../../constants/Colors';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const CartItem = (props) => {
-  const {item} = props;
+  const {item, onRemove} = props;
   return (
     <Card style={styles.item}>
       <CardItem cardBody>
-        <View style={styles.flexRow}>
-          <View style={styles.flexRow}>
+        <View style={styles.infosContainer}>
+          <View style={styles.flexRow70}>
             <DefaultText bold style={styles.quantity}>
               {item.quantity}
               {'  '}
             </DefaultText>
-            <DefaultText bold style={styles.title}>
+            <DefaultText numberOfLines={1} bold style={styles.title}>
               {item.productTitle}
             </DefaultText>
           </View>
-          <View style={{...styles.flexRow, ...styles.alignRight}}>
+          <View style={styles.flexRow}>
             <DefaultText style={styles.price}>$ {item.sum}</DefaultText>
-            <Button danger transparent>
-              <Icon name="ios-trash" />
-            </Button>
+            <TouchableOpacity onPress={onRemove}>
+              <Icon name="ios-trash" style={styles.trashIcon} />
+            </TouchableOpacity>
           </View>
         </View>
       </CardItem>
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     padding: 5,
     alignSelf: 'center',
     width: '80%',
+    borderRadius: 10,
   },
   quantity: {
     fontSize: 14,
@@ -49,12 +51,24 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 14,
+    marginRight: 15,
   },
   flexRow: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  alignRight: {
-    justifyContent: 'flex-end',
+  flexRow70: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '55%',
+  },
+  infosContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  trashIcon: {
+    color: 'red',
   },
 });
