@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {StyleSheet, Image, View} from 'react-native';
 import {Button, Text} from 'native-base';
 import Colors from '../../constants/Colors';
-import DefaultText from '../../components/DefaultText';
+import DefaultText from '../../components/utils/DefaultText';
 
 const ProductDetailScreen = (props) => {
   const {navigation, onAddToCart} = props;

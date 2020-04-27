@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
-import Fonts from '../constants/Fonts';
+import Fonts from '../../constants/Fonts';
 
 const DefaultText = (props) => {
   const setStyle = props.bold ? styles.bold : styles.default;

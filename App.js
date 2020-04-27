@@ -6,16 +6,20 @@ import {combineReducers, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import Colors from './src/constants/Colors';
 import {cartReducer} from './src/store/reducers/cart';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer); //, composeWithDevTools());
 
 const App: () => React$Node = () => {
-  YellowBox.ignoreWarnings(['Picker has been']);
+  YellowBox.ignoreWarnings([
+    'Picker has been',
+    "Deprecation in 'navigationOptions'",
+  ]);
   return (
     <>
       <Provider store={store}>

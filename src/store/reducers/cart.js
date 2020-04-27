@@ -1,27 +1,34 @@
 import {ADD_ITEMS_TO_CART} from '../actions/cart';
 
 const initialState = {
-  items: {},
+  items: [],
   totalAmmount: 0,
 };
 
 export const cartReducer = (state = initialState, action) => {
-  switch (action) {
+  switch (action.type) {
     case ADD_ITEMS_TO_CART:
       const {item} = action;
-      if (state.items[item.id]) {
-        item.quantity++;
-        item.price += state.items[item.id].price;
+
+      state.totalAmmount += item.productPrice;
+      state.totalAmmount = parseFloat(state.totalAmmount.toFixed(2));
+
+      const existsProdIndex = state.items.findIndex(
+        (itm) => itm.productId === item.productId,
+      );
+
+      console.log(existsProdIndex);
+
+      if (existsProdIndex >= 0) {
+        state.items[existsProdIndex].quantity++;
+        state.items[existsProdIndex].sum += item.productPrice;
         return {
           ...state,
-          items: {...state.items, [item.id]: item},
-          totalAmmount: state.totalAmmount + item.price,
         };
       }
+      state.items.push(item);
       return {
         ...state,
-        items: {...state.items, [item.id]: item},
-        totalAmmount: state.totalAmmount + item.price,
       };
 
     default:

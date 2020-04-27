@@ -1,9 +1,11 @@
-import React, {useEffect, useCallback} from 'react';
+import React from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../components/shop/ProductCard';
 import * as cartActions from '../../store/actions/cart';
 import CartItem from '../../models/cart-item';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import CustomHeaderButton from '../../components/UI/HeaderButton';
 
 const ProductsOverviewScreen = (props) => {
   const products = useSelector((state) => state.products.availableProducts);
@@ -29,10 +31,11 @@ const ProductsOverviewScreen = (props) => {
                 dispatch(
                   cartActions.addItemsToCart(
                     new CartItem(
+                      item.id,
                       1,
                       item.price,
                       item.title,
-                      item.price * item.quantity,
+                      item.price,
                     ),
                   ),
                 );
@@ -45,10 +48,19 @@ const ProductsOverviewScreen = (props) => {
     </View>
   );
 };
-
+HeaderButtons;
 ProductsOverviewScreen.navigationOptions = (navData) => {
   return {
     headerTitle: 'All Products',
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Cart"
+          iconName="md-cart"
+          onPress={() => navData.navigation.navigate('Cart')}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 

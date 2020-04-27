@@ -4,10 +4,14 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "run-emulator": "emulator -avd android",
+    "run-emulator-s": "emulator -avd android-s",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "remotedev": "remotedev --hostname=localhost --port=8000",
+    "postinstall": "rndebugger-open"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
@@ -19,11 +23,14 @@
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.5.0",
+    "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.3.8",
     "react-navigation-drawer": "^2.4.12",
+    "react-navigation-header-buttons": "^3.0.5",
     "react-navigation-stack": "^2.3.13",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "remote-redux-devtools": "0.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -33,7 +40,9 @@
     "eslint": "^6.8.0",
     "jest": "^25.4.0",
     "metro-react-native-babel-preset": "^0.59.0",
-    "react-test-renderer": "16.11.0"
+    "react-test-renderer": "16.11.0",
+    "redux-devtools-extension": "^2.13.8",
+    "remotedev-server": "^0.3.1"
   },
   "jest": {
     "preset": "react-native"

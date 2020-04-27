@@ -8,9 +8,9 @@ import {
   Platform,
 } from 'react-native';
 import {Button, Card, Body, CardItem, Grid, Row, Col, Text} from 'native-base';
-import Colors from '../constants/Colors';
-import Fonts from '../constants/Fonts';
-import DefaultText from './DefaultText';
+import Colors from '../../constants/Colors';
+import Fonts from '../../constants/Fonts';
+import DefaultText from '../utils/DefaultText';
 
 const ProductItem = (props) => {
   const {prod, onViewDetails, onAddToCart} = props;
