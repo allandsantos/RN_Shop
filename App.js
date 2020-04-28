@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   orders: ordersReducer,
 });
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer); //, composeWithDevTools());
 
 const App: () => React$Node = () => {
   YellowBox.ignoreWarnings([

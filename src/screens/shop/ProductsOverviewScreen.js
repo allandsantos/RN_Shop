@@ -6,6 +6,7 @@ import * as cartActions from '../../store/actions/cart';
 import CartItem from '../../models/cart-item';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../../components/UI/HeaderButton';
+import MenuDrawer from '../../components/UI/MenuDrawer';
 
 const ProductsOverviewScreen = (props) => {
   const products = useSelector((state) => state.products.availableProducts);
@@ -16,36 +17,34 @@ const ProductsOverviewScreen = (props) => {
       <View style={styles.productsContainer}>
         <FlatList
           data={products}
-          renderItem={({item}) => (
-            <ProductCard
-              prod={{
-                id: item.id,
-                title: item.title,
-                price: item.price,
-                imageUrl: item.imageUrl,
-              }}
-              onViewDetails={() => {
-                props.navigation.navigate('ProductDetails', {product: item});
-              }}
-              onAddToCart={() => {
-                dispatch(
-                  cartActions.addItemsToCart(
-                    new CartItem(
-                      item.id,
-                      1,
-                      item.price,
-                      item.title,
-                      item.price,
-                    ),
-                  ),
-                );
-              }}
-              onRemove={() => {
-                console.log('hitou');
-                dispatch(cartActions.removeItemsFromCart(item.id));
-              }}
-            />
-          )}
+          renderItem={({item}) => {
+            const onAddToCart = dispatch(
+              cartActions.addItemsToCart(
+                new CartItem(item.id, 1, item.price, item.title, item.price),
+              ),
+            );
+            return (
+              <ProductCard
+                prod={{
+                  id: item.id,
+                  title: item.title,
+                  price: item.price,
+                  imageUrl: item.imageUrl,
+                }}
+                onViewDetails={() => {
+                  props.navigation.navigate('ProductDetails', {
+                    product: item,
+                    onAddToCart,
+                  });
+                }}
+                onAddToCart={onAddToCart}
+                onRemove={() => {
+                  console.log('hitou');
+                  dispatch(cartActions.removeItemsFromCart(item.id));
+                }}
+              />
+            );
+          }}
           showsVerticalScrollIndicator={false}
         />
       </View>
@@ -54,7 +53,6 @@ const ProductsOverviewScreen = (props) => {
 };
 HeaderButtons;
 ProductsOverviewScreen.navigationOptions = (navData) => {
-  console.log(navData.navigation);
   return {
     headerTitle: 'All Products',
     headerRight: (
@@ -69,17 +67,7 @@ ProductsOverviewScreen.navigationOptions = (navData) => {
         />
       </HeaderButtons>
     ),
-    // headerLeft: (
-    //   <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-    //     <Item
-    //       title="Menu"
-    //       iconName="ios-menu"
-    //       onPress={() => {
-    //         navData.navigation.toggleDrawer();
-    //       }}
-    //     />
-    //   </HeaderButtons>
-    // ),
+    headerLeft: <MenuDrawer navData={navData} />,
   };
 };
 

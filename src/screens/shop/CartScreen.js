@@ -10,7 +10,7 @@ import * as OrdersActions from '../../store/actions/orders';
 
 const CartScreen = (props) => {
   const dispatch = useDispatch();
-  const {items: cartItems, totalAmmount} = useSelector((state) => state.cart);
+  const {items: cartItems, totalAmount} = useSelector((state) => state.cart);
   const cart = useSelector((state) => state.cart);
   const buttonProps = {
     disabled: cartItems.length > 0 ? false : true,
@@ -24,7 +24,7 @@ const CartScreen = (props) => {
             <DefaultText style={styles.totalLabel} bold>
               Total:{'   '}
               <DefaultText bold style={styles.totalValue}>
-                $ {totalAmmount}
+                $ {totalAmount}
               </DefaultText>
             </DefaultText>
             <Button
@@ -46,6 +46,7 @@ const CartScreen = (props) => {
             item={item}
             onRemove={() => {
               dispatch(CartActions.removeItemsFromCart(item.productId));
+              dispatch(CartActions.resetCart());
             }}
           />
         ))}

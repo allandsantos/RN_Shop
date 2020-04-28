@@ -1,22 +1,19 @@
 import {createDrawerNavigator} from 'react-navigation-drawer';
-import EditProductScreen from '../screens/manage/EditProductScreen';
-import {StackNavigation, OrderNavigation} from './StackNavigation';
-import {createAppContainer} from 'react-navigation';
-import Fonts from '../constants/Fonts';
+import {ShopNavigation, OrderNavigation} from './StackNavigation';
 import Colors from '../constants/Colors';
 
 const defaultNavigationOptions = {
   contentOptions: {
-    activeTintColor: Colors.green,
+    activeTintColor: Colors.purple,
   },
 };
 
 const DrawerNavigation = createDrawerNavigator(
   {
-    Shop: StackNavigation,
+    Shop: ShopNavigation,
     Orders: OrderNavigation,
   },
   defaultNavigationOptions,
 );
 
-export default createAppContainer(DrawerNavigation);
+export default DrawerNavigation;

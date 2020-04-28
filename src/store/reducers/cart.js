@@ -1,27 +1,32 @@
-import {ADD_ITEMS_TO_CART, REMOVE_ITEM_FROM_CART} from '../actions/cart';
+import {
+  ADD_ITEMS_TO_CART,
+  REMOVE_ITEM_FROM_CART,
+  RESET_CART,
+} from '../actions/cart';
 
 const initialState = {
   items: [],
-  totalAmmount: 0,
+  totalAmount: 0,
 };
 
 export const cartReducer = (state = initialState, action) => {
+  console.log(action.type);
   switch (action.type) {
     case ADD_ITEMS_TO_CART:
       const {item} = action;
 
-      state.totalAmmount += item.productPrice;
-      state.totalAmmount = parseFloat(state.totalAmmount.toFixed(2));
+      state.totalAmount += item.productPrice;
+      state.totalAmount = parseFloat(state.totalAmount.toFixed(2));
 
-      const existsProdIndex = state.items.findIndex(
+      const existsProd = state.items.find(
         (itm) => itm.productId === item.productId,
       );
 
-      console.log(existsProdIndex);
-
-      if (existsProdIndex >= 0) {
-        state.items[existsProdIndex].quantity++;
-        state.items[existsProdIndex].sum += item.productPrice;
+      if (existsProd) {
+        existsProd.quantity++;
+        existsProd.sum = parseFloat(
+          (existsProd.sum + item.productPrice).toFixed(2),
+        );
         return {
           ...state,
         };
@@ -43,11 +48,14 @@ export const cartReducer = (state = initialState, action) => {
       } else {
         state.items.splice(indexToDelete, 1);
       }
-      state.totalAmmount = parseFloat(
-        (state.totalAmmount - itemForExclude.productPrice).toFixed(2),
+      state.totalAmount = parseFloat(
+        (state.totalAmount - itemForExclude.productPrice).toFixed(2),
       );
 
       return {...state};
+    case RESET_CART:
+      console.log(initialState);
+      return initialState;
     default:
       return state;
   }

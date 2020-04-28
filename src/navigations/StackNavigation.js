@@ -1,3 +1,4 @@
+import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack';
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
@@ -5,6 +6,7 @@ import OrdersScreen from '../screens/manage/OrdersScreen';
 import CartScreen from '../screens/shop/CartScreen';
 import Colors from '../constants/Colors';
 import Fonts from '../constants/Fonts';
+import {Icon} from 'native-base';
 
 const defaultNavigationOptions = {
   defaultNavigationOptions: {
@@ -25,20 +27,40 @@ const defaultNavigationOptions = {
   },
 };
 
-export const StackNavigation = createStackNavigator(
+export const ShopNavigation = createStackNavigator(
   {
     ProductsOverview: ProductsOverviewScreen,
     ProductDetails: ProductDetailScreen,
     Cart: CartScreen,
   },
-  defaultNavigationOptions,
+  {
+    ...defaultNavigationOptions,
+    ...{
+      navigationOptions: {
+        drawerIcon: (drawerConfig) => (
+          <Icon name="ios-cart" fontSize={23} color={drawerConfig.tintColor} />
+        ),
+      },
+    },
+  },
 );
 
 export const OrderNavigation = createStackNavigator(
   {
     Orders: OrdersScreen,
   },
-  defaultNavigationOptions,
+  {
+    ...defaultNavigationOptions,
+    ...{
+      navigationOptions: {
+        drawerIcon: (drawerConfig) => (
+          <Icon
+            name="ios-create"
+            fontSize={23}
+            color={drawerConfig.tintColor}
+          />
+        ),
+      },
+    },
+  },
 );
-
-export default StackNavigation;
