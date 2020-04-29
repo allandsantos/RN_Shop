@@ -1,5 +1,9 @@
 import {createDrawerNavigator} from 'react-navigation-drawer';
-import {ShopNavigation, OrderNavigation} from './StackNavigation';
+import {
+  ShopNavigation,
+  OrderNavigation,
+  UserProductsNavigation,
+} from './StackNavigation';
 import Colors from '../constants/Colors';
 
 const defaultNavigationOptions = {
@@ -11,6 +15,7 @@ const defaultNavigationOptions = {
 const DrawerNavigation = createDrawerNavigator(
   {
     Shop: ShopNavigation,
+    ManageProducts: UserProductsNavigation,
     Orders: OrderNavigation,
   },
   defaultNavigationOptions,

@@ -5,8 +5,9 @@ import Colors from '../../constants/Colors';
 import DefaultText from '../../components/utils/DefaultText';
 
 const ProductDetailScreen = (props) => {
-  const {navigation, onAddToCart} = props;
+  const {navigation} = props;
   const product = navigation.getParam('product');
+  const onAddToCart = navigation.getParam('onAddToCart');
 
   useEffect(() => {
     navigation.setParams({title: product.title});

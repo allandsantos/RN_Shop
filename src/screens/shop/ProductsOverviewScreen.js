@@ -18,11 +18,12 @@ const ProductsOverviewScreen = (props) => {
         <FlatList
           data={products}
           renderItem={({item}) => {
-            const onAddToCart = dispatch(
-              cartActions.addItemsToCart(
-                new CartItem(item.id, 1, item.price, item.title, item.price),
-              ),
-            );
+            const onAddToCart = () =>
+              dispatch(
+                cartActions.addItemsToCart(
+                  new CartItem(item.id, 1, item.price, item.title, item.price),
+                ),
+              );
             return (
               <ProductCard
                 prod={{
@@ -38,10 +39,6 @@ const ProductsOverviewScreen = (props) => {
                   });
                 }}
                 onAddToCart={onAddToCart}
-                onRemove={() => {
-                  console.log('hitou');
-                  dispatch(cartActions.removeItemsFromCart(item.id));
-                }}
               />
             );
           }}

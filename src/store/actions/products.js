@@ -1,5 +1,6 @@
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const CREATE_PRODUCT = 'EDIT_PRODUCT';
+export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 
 export const editProduct = (product) => {
   return {
@@ -12,5 +13,12 @@ export const newProduct = (product) => {
   return {
     type: CREATE_PRODUCT,
     product: product,
+  };
+};
+
+export const removeProduct = (id) => {
+  return {
+    type: REMOVE_PRODUCT,
+    id,
   };
 };

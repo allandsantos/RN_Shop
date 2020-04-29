@@ -1,6 +1,5 @@
 import {SAVE_NEW_ORDER} from '../actions/orders';
 import Order from '../../models/order';
-import * as CartActions from '../actions/cart';
 const initialState = {
   orders: [],
 };

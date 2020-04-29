@@ -2,11 +2,12 @@ import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack';
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
-import OrdersScreen from '../screens/manage/OrdersScreen';
+import OrdersScreen from '../screens/shop/OrdersScreen';
 import CartScreen from '../screens/shop/CartScreen';
 import Colors from '../constants/Colors';
 import Fonts from '../constants/Fonts';
 import {Icon} from 'native-base';
+import UserProductsScreen from '../screens/manage/UserProductsScreen';
 
 const defaultNavigationOptions = {
   defaultNavigationOptions: {
@@ -48,6 +49,21 @@ export const ShopNavigation = createStackNavigator(
 export const OrderNavigation = createStackNavigator(
   {
     Orders: OrdersScreen,
+  },
+  {
+    ...defaultNavigationOptions,
+    ...{
+      navigationOptions: {
+        drawerIcon: (drawerConfig) => (
+          <Icon name="ios-list" fontSize={23} color={drawerConfig.tintColor} />
+        ),
+      },
+    },
+  },
+);
+export const UserProductsNavigation = createStackNavigator(
+  {
+    UserProducts: UserProductsScreen,
   },
   {
     ...defaultNavigationOptions,

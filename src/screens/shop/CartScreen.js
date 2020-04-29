@@ -33,6 +33,7 @@ const CartScreen = (props) => {
               rounded
               onPress={() => {
                 dispatch(OrdersActions.saveNewOrder(cart));
+                dispatch(CartActions.resetCart());
               }}>
               <Text style={styles.buttonText}>Order Now</Text>
             </Button>
@@ -46,7 +47,6 @@ const CartScreen = (props) => {
             item={item}
             onRemove={() => {
               dispatch(CartActions.removeItemsFromCart(item.productId));
-              dispatch(CartActions.resetCart());
             }}
           />
         ))}

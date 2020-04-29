@@ -4,7 +4,6 @@ import MenuDrawer from '../../components/UI/MenuDrawer';
 import {useSelector} from 'react-redux';
 import {FlatList} from 'react-native-gesture-handler';
 import OrderItem from '../../components/manage/OrderItem';
-import DefaultText from '../../components/utils/DefaultText';
 
 const OrdersScreen = () => {
   const {orders} = useSelector((state) => state.orders);

@@ -13,7 +13,21 @@ import Fonts from '../../constants/Fonts';
 import DefaultText from '../utils/DefaultText';
 
 const ProductItem = (props) => {
-  const {prod, onViewDetails, onAddToCart} = props;
+  const {prod, onViewDetails, onAddToCart, onEdit, onRemove} = props;
+
+  const buttonsActions = {
+    leftButtonText: 'Details',
+    leftButtonAction: onViewDetails,
+    rightButtonText: 'To Cart',
+    rightButtonAction: onAddToCart,
+  };
+
+  if (onEdit) {
+    buttonsActions.leftButtonText = 'Edit';
+    buttonsActions.leftButtonAction = onEdit;
+    buttonsActions.rightButtonText = 'Remove';
+    buttonsActions.rightButtonAction = onRemove;
+  }
 
   let TouchableCmp = TouchableOpacity;
   if (Platform.OS === 'android' && Platform.Version >= 21) {
@@ -40,11 +54,14 @@ const ProductItem = (props) => {
             <Grid>
               <Col>
                 <Row style={styles.buttonsContainer}>
-                  <Button dark bordered onPress={onViewDetails}>
-                    <Text>Details</Text>
+                  <Button
+                    dark
+                    bordered
+                    onPress={buttonsActions.leftButtonAction}>
+                    <Text>{buttonsActions.leftButtonText}</Text>
                   </Button>
-                  <Button dark onPress={onAddToCart}>
-                    <Text>To Cart</Text>
+                  <Button dark onPress={buttonsActions.rightButtonAction}>
+                    <Text>{buttonsActions.rightButtonText}</Text>
                   </Button>
                 </Row>
               </Col>
