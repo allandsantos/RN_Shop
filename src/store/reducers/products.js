@@ -1,26 +1,29 @@
 import PRODUCTS from '../../data/dummy-data';
 import {EDIT_PRODUCT, REMOVE_PRODUCT} from '../actions/products';
+import {produce} from 'immer';
 
 const initialState = {
   availableProducts: PRODUCTS,
   userProducts: PRODUCTS.filter((prod) => prod.ownerId === 'u1'),
 };
 
-export const productsReducer = (state = initialState, action) => {
+export const productsReducer = produce((draft, action) => {
   switch (action.type) {
     case EDIT_PRODUCT:
-      return {...state};
+      return draft;
     case REMOVE_PRODUCT:
-      console.log('INDEEEX');
-      console.log(indexToRemove);
-      const indexToRemove = state.availableProducts.findIndex(
+      const indexToRemove = draft.availableProducts.findIndex(
         (prod) => prod.id === action.id,
       );
-      console.log('INDEEEX');
-      console.log(indexToRemove);
-      state.availableProducts.splice(indexToRemove);
-      return {...state};
+      draft.availableProducts.splice(indexToRemove, 1);
+      const indexOfuserProducts = draft.userProducts.findIndex(
+        (prod) => prod.id === action.id,
+      );
+      if (indexOfuserProducts >= 0) {
+        draft.userProducts.splice(indexOfuserProducts, 1);
+      }
+      return draft;
     default:
-      return state;
+      return draft;
   }
-};
+}, initialState);

@@ -7,7 +7,7 @@ import {
   View,
   Platform,
 } from 'react-native';
-import {Button, Card, Body, CardItem, Grid, Row, Col, Text} from 'native-base';
+import {Card, Body, CardItem, Grid, Row, Col} from 'native-base';
 import Colors from '../../constants/Colors';
 import DefaultText from '../utils/DefaultText';
 import DefaultButton from '../UI/DefaultButton';

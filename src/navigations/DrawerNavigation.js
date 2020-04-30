@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 
 const defaultNavigationOptions = {
   contentOptions: {
-    activeTintColor: Colors.purple,
+    activeTintColor: Colors.mainApp,
   },
 };
 

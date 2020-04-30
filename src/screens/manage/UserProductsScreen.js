@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, FlatList} from 'react-native';
 import ProductCard from '../../components/shop/ProductCard';
 import {useDispatch, useSelector} from 'react-redux';
 import * as ProductActions from '../../store/actions/products';
+import * as CartActions from '../../store/actions/cart';
 import MenuDrawer from '../../components/UI/MenuDrawer';
 
 const UserProductsScreen = (props) => {
@@ -34,6 +35,7 @@ const UserProductsScreen = (props) => {
                 }}
                 onRemove={() => {
                   dispatch(ProductActions.removeProduct(item.id));
+                  dispatch(CartActions.removeProduct(item.id));
                 }}
               />
             );

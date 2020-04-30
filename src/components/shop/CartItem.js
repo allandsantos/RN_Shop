@@ -1,7 +1,7 @@
 import React from 'react';
-import {Card, CardItem, Body, Grid, Row, Col, Button, Icon} from 'native-base';
+import {Card, CardItem, Icon} from 'native-base';
 import DefaultText from '../utils/DefaultText';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Colors from '../../constants/Colors';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
