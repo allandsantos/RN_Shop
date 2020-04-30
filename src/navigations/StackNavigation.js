@@ -12,7 +12,7 @@ import UserProductsScreen from '../screens/manage/UserProductsScreen';
 const defaultNavigationOptions = {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: 'black',
+      backgroundColor: Colors.mainApp,
     },
     headerTitleStyle: {
       fontFamily: Fonts.openSansBold,

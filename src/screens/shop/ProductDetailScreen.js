@@ -18,7 +18,7 @@ const ProductDetailScreen = (props) => {
     <View style={styles.screen}>
       <Image style={styles.image} source={{uri: product.imageUrl}} />
       <View style={styles.container}>
-        <Button dark button onPress={onAddToCart}>
+        <Button color={Colors.mainApp} button onPress={onAddToCart}>
           <Text>ADD TO CART</Text>
         </Button>
       </View>

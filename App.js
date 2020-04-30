@@ -25,7 +25,7 @@ const App: () => React$Node = () => {
   return (
     <>
       <Provider store={store}>
-        <StatusBar backgroundColor={Colors.dark} />
+        <StatusBar backgroundColor={Colors.mainApp} />
         <MainNavigation />
       </Provider>
     </>

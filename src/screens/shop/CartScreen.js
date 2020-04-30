@@ -28,7 +28,7 @@ const CartScreen = (props) => {
               </DefaultText>
             </DefaultText>
             <Button
-              dark
+              color={Colors.mainApp}
               {...buttonProps}
               rounded
               onPress={() => {

@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import {Button, Card, Body, CardItem, Grid, Row, Col, Text} from 'native-base';
 import Colors from '../../constants/Colors';
-import Fonts from '../../constants/Fonts';
 import DefaultText from '../utils/DefaultText';
+import DefaultButton from '../UI/DefaultButton';
+import DefaultOutlineButton from '../UI/DefaultOutlineButton';
 
 const ProductItem = (props) => {
   const {prod, onViewDetails, onAddToCart, onEdit, onRemove} = props;
@@ -54,15 +55,13 @@ const ProductItem = (props) => {
             <Grid>
               <Col>
                 <Row style={styles.buttonsContainer}>
-                  <Button
-                    dark
-                    bordered
+                  <DefaultOutlineButton
                     onPress={buttonsActions.leftButtonAction}>
-                    <Text>{buttonsActions.leftButtonText}</Text>
-                  </Button>
-                  <Button dark onPress={buttonsActions.rightButtonAction}>
-                    <Text>{buttonsActions.rightButtonText}</Text>
-                  </Button>
+                    {buttonsActions.leftButtonText}
+                  </DefaultOutlineButton>
+                  <DefaultButton onPress={buttonsActions.rightButtonAction}>
+                    {buttonsActions.rightButtonText}
+                  </DefaultButton>
                 </Row>
               </Col>
             </Grid>
