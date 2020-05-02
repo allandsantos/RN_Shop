@@ -19,10 +19,10 @@ const EditProductScreen = (props) => {
   const [imageUrl, setImageUrl] = useState(product.imageUrl);
   const [price, setPrice] = useState(product.price.toString());
 
-  console.log('Preço atual ' + price);
   const submitHandler = useCallback(() => {
-    const itemId = product ? product.id : new Date().toString();
-    console.log('Preço alterado ' + price);
+    const isNewProduct = product.id === '' ? true : false;
+    const itemId = product.id === '' ? new Date().toString() : product.id;
+
     const item = new Product(
       itemId,
       'u1',
@@ -31,12 +31,13 @@ const EditProductScreen = (props) => {
       description,
       parseFloat(price),
     );
-    if (product) {
-      dispatch(ProductActions.editProduct(item));
-    } else {
+    if (isNewProduct) {
       dispatch(ProductActions.newProduct(item));
+    } else {
+      dispatch(ProductActions.editProduct(item));
     }
-  }, [title, description, imageUrl, price]);
+    props.navigation.navigate('UserProducts', {});
+  }, [dispatch, title, description, imageUrl, price]);
 
   const dispatch = useDispatch();
 
