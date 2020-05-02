@@ -21,6 +21,7 @@ const App: () => React$Node = () => {
   YellowBox.ignoreWarnings([
     'Picker has been',
     "Deprecation in 'navigationOptions'",
+    'Animated',
   ]);
   return (
     <>

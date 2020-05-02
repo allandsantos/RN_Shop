@@ -3,6 +3,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import OrdersScreen from '../screens/shop/OrdersScreen';
+import EditProductScreen from '../screens/manage/EditProductScreen';
 import CartScreen from '../screens/shop/CartScreen';
 import Colors from '../constants/Colors';
 import Fonts from '../constants/Fonts';
@@ -64,6 +65,7 @@ export const OrderNavigation = createStackNavigator(
 export const UserProductsNavigation = createStackNavigator(
   {
     UserProducts: UserProductsScreen,
+    EditProduct: EditProductScreen,
   },
   {
     ...defaultNavigationOptions,

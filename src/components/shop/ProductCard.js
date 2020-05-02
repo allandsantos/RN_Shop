@@ -36,7 +36,7 @@ const ProductItem = (props) => {
   }
   return (
     <Card style={styles.cardContainer}>
-      <TouchableCmp onPress={onViewDetails} useForeground>
+      <TouchableCmp onPress={buttonsActions.leftButtonAction} useForeground>
         <View>
           <CardItem cardBody>
             <Body>

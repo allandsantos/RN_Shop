@@ -19,5 +19,5 @@ export const resetCart = () => ({
 
 export const removeProduct = (id) => ({
   type: REMOVE_PRODUCT,
-  id,
+  productId: id,
 });

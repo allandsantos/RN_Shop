@@ -5,6 +5,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as ProductActions from '../../store/actions/products';
 import * as CartActions from '../../store/actions/cart';
 import MenuDrawer from '../../components/UI/MenuDrawer';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import CustomHeaderButton from '../../components/UI/HeaderButton';
 
 const UserProductsScreen = (props) => {
   const dispatch = useDispatch();
@@ -16,9 +18,6 @@ const UserProductsScreen = (props) => {
         <FlatList
           data={products}
           renderItem={({item}) => {
-            const onEdit = () => {
-              props.navigation.navigate('EditProduct');
-            };
             return (
               <ProductCard
                 prod={{
@@ -28,9 +27,8 @@ const UserProductsScreen = (props) => {
                   imageUrl: item.imageUrl,
                 }}
                 onEdit={() => {
-                  props.navigation.navigate('ProductDetails', {
+                  props.navigation.navigate('EditProduct', {
                     product: item,
-                    onEdit: onEdit,
                   });
                 }}
                 onRemove={() => {
@@ -51,6 +49,17 @@ UserProductsScreen.navigationOptions = (navData) => {
   return {
     headerTitle: 'Products Manager',
     headerLeft: <MenuDrawer navData={navData} />,
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Add"
+          iconName="md-add"
+          onPress={() => {
+            navData.navigation.navigate('EditProduct');
+          }}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 

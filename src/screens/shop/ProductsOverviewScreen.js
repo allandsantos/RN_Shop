@@ -10,6 +10,7 @@ import MenuDrawer from '../../components/UI/MenuDrawer';
 
 const ProductsOverviewScreen = (props) => {
   const products = useSelector((state) => state.products.availableProducts);
+  console.log(products[0]);
   const dispatch = useDispatch();
 
   return (
@@ -52,6 +53,7 @@ HeaderButtons;
 ProductsOverviewScreen.navigationOptions = (navData) => {
   return {
     headerTitle: 'All Products',
+    headerLeft: <MenuDrawer navData={navData} />,
     headerRight: (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
@@ -64,7 +66,6 @@ ProductsOverviewScreen.navigationOptions = (navData) => {
         />
       </HeaderButtons>
     ),
-    headerLeft: <MenuDrawer navData={navData} />,
   };
 };
 
