@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import ProductCard from '../../components/shop/ProductCard';
@@ -10,7 +10,7 @@ import MenuDrawer from '../../components/UI/MenuDrawer';
 
 const ProductsOverviewScreen = (props) => {
   const products = useSelector((state) => state.products.availableProducts);
-  console.log(products[0]);
+
   const dispatch = useDispatch();
 
   return (

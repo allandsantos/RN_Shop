@@ -1,23 +1,58 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useState, useCallback, useEffect, useReducer} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Form, Item, Label, Input} from 'native-base';
-import DefaultButton from '../../components/UI/DefaultButton';
 import {useDispatch} from 'react-redux';
 import * as ProductActions from '../../store/actions/products';
 import {HeaderButtons, Item as Itm} from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../../components/UI/HeaderButton';
 import Product from '../../models/product';
+import produce from 'immer';
+
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
+
+const formReducer = produce((state, action) => {
+  switch (action.type) {
+    case FORM_INPUT_UPDATE:
+      state.inputValues[action.inputIdentifier] = action.value;
+      state.inputValidities[action.inputIdentifier] = action.isValid;
+      let formIsValid = true;
+      for (const key in state.inputValidities) {
+        formIsValid = formIsValid && key;
+      }
+      state.formIsValid = formIsValid;
+      return state;
+    default:
+      return state;
+  }
+});
 
 const EditProductScreen = (props) => {
   let product = props.navigation.getParam('product');
+
+  const {formState, dispatchFormState} = useReducer(formReducer, {
+    inputValues: {
+      title: product.title,
+      description: product.description,
+      imageUrl: product.imageUrl,
+      price: product.price.toString(),
+    },
+    inputValidities: {
+      title: product ? true : false,
+      description: product ? true : false,
+      imageUrl: product ? true : false,
+      price: product ? true : false,
+    },
+    formIsValid: product ? true : false,
+  });
+
   if (!product) {
     product = new Product('', '', '', '', '', 0.0);
   }
-  const [title, setTitle] = useState(product.title);
-  const [description, setDescription] = useState(product.description);
-  const [imageUrl, setImageUrl] = useState(product.imageUrl);
-  const [price, setPrice] = useState(product.price.toString());
+
+  console.log(formState);
+
+  const {title, description, imageUrl, price} = formState.inputValues;
 
   console.log('Preço atual ' + price);
   const submitHandler = useCallback(() => {
@@ -36,6 +71,7 @@ const EditProductScreen = (props) => {
     } else {
       dispatch(ProductActions.newProduct(item));
     }
+    dispatch(props.navigation.goBack());
   }, [title, description, imageUrl, price]);
 
   const dispatch = useDispatch();
@@ -44,27 +80,60 @@ const EditProductScreen = (props) => {
     props.navigation.setParams({submit: submitHandler});
   }, [submitHandler]);
 
+  const textChangeHandler = (text, inputIdentifier) => {
+    let isValid = false;
+    if (text.trim().length > 0) {
+      if (
+        (inputIdentifier === 'price' && parseFloat(text) >= 0) ||
+        inputIdentifier !== 'price'
+      ) {
+        isValid = true;
+      }
+    }
+    dispatchFormState({
+      type: FORM_INPUT_UPDATE,
+      value: text,
+      isValid,
+      inputIdentifier,
+    });
+  };
+
   return (
     <View style={styles.screen}>
       <Form style={styles.form}>
         <Item floatingLabel>
           <Label>Title</Label>
-          <Input value={title} onChangeText={(text) => setTitle(text)} />
+          <Input
+            value={title}
+            onChangeText={(text) => textChangeHandler(text, 'title')}
+            autoCapitalize="sentences"
+            returnKeyType="next"
+          />
         </Item>
         <Item floatingLabel>
           <Label>Description</Label>
           <Input
             value={description}
-            onChangeText={(text) => setDescription(text)}
+            onChangeText={(text) => textChangeHandler(text, 'description')}
+            autoCorrect
+            multiline={true}
           />
         </Item>
         <Item floatingLabel>
           <Label>Image URL</Label>
-          <Input value={imageUrl} onChangeText={(text) => setImageUrl(text)} />
+          <Input
+            value={imageUrl}
+            onChangeText={(text) => textChangeHandler(text, 'imageUrl')}
+            multiline={true}
+          />
         </Item>
         <Item floatingLabel last>
           <Label>Price</Label>
-          <Input value={price} onChangeText={(text) => setPrice(text)} />
+          <Input
+            value={price}
+            onChangeText={(text) => textChangeHandler(text, 'price')}
+            keyboardType="decimal-pad"
+          />
         </Item>
       </Form>
     </View>
@@ -101,5 +170,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 30,
+  },
+  errorMessage: {
+    paddingLeft: 10,
   },
 });
