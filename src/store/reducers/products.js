@@ -18,7 +18,7 @@ export const productsReducer = produce((draft, action) => {
       const produt4Edit = draft.availableProducts.find(
         (prd) => prd.id === product.id,
       );
-      console.log(action);
+
       produt4Edit.title = product.title;
       produt4Edit.description = product.description;
       produt4Edit.imageUrl = product.imageUrl;
@@ -48,7 +48,8 @@ export const productsReducer = produce((draft, action) => {
       return draft;
     case CREATE_PRODUCT:
       const productAdd = action.product;
-      draft.push(productAdd);
+      draft.userProducts.push(productAdd);
+      draft.availableProducts.push(productAdd);
       return draft;
     default:
       return draft;

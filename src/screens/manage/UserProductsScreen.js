@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, View, FlatList, Alert} from 'react-native';
 import ProductCard from '../../components/shop/ProductCard';
 import {useDispatch, useSelector} from 'react-redux';
 import * as ProductActions from '../../store/actions/products';
@@ -12,6 +12,19 @@ const UserProductsScreen = (props) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.availableProducts);
 
+  const deleteHandler = (item) => {
+    Alert.alert('Are you sure?', 'Do you really want to delete this item?', [
+      {text: 'No', style: 'default'},
+      {
+        text: 'Yes',
+        style: 'destructive',
+        onPress: () => {
+          dispatch(ProductActions.removeProduct(item.id));
+          dispatch(CartActions.removeProduct(item.id));
+        },
+      },
+    ]);
+  };
   return (
     <View style={styles.screen}>
       <View style={styles.productsContainer}>
@@ -31,10 +44,7 @@ const UserProductsScreen = (props) => {
                     product: item,
                   });
                 }}
-                onRemove={() => {
-                  dispatch(ProductActions.removeProduct(item.id));
-                  dispatch(CartActions.removeProduct(item.id));
-                }}
+                onRemove={() => deleteHandler(item)}
               />
             );
           }}

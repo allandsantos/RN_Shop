@@ -1,5 +1,5 @@
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
-export const CREATE_PRODUCT = 'EDIT_PRODUCT';
+export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 
 export const editProduct = (product) => {
